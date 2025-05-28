@@ -1,0 +1,64 @@
+/** Rich text **/
+
+/* .rich-text-article ol {
+    list-style: none;
+    counter-reset: list-counter;
+    padding-left: 0;
+}
+
+.rich-text-article ol > li {
+    counter-increment: list-counter;
+    position: relative;
+    padding-left: 2.75rem;
+} */
+
+.rich-text-content-detail ol > li::before {
+    content: counter(list-counter);
+    /* display: block; */
+    position: absolute;
+    top: 0rem;
+    left: 0;
+}
+
+.rich-text-content-detail ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.rich-text-content-detail ul > li {
+    position: relative;
+    padding-left: 2.75rem;
+}
+
+.rich-text-content-detail ul > li::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0.2rem;
+    left: 0;
+    width: 2rem;
+    height: 2rem;
+    background-image: url('https://cdn.prod.website-files.com/68075290fd70387efdedc428/681c9e6e96b9c1fc6f14cf0d_Icon_white.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.rich-text-content-detail blockquote strong {
+    font-style: normal;
+    font-size: 1.125rem;
+    font-weight: 400;
+}
+
+/* .rich-text-article ul > li > ul > li::before {
+    content: "";
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-image: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    flex: 0 0 auto;
+} */
+
