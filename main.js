@@ -6,14 +6,6 @@ gsap.registerPlugin(ScrollTrigger, ScrollSmoother, Draggable);
 // =========================
 // Init Functions
 // =========================
-function initScrollSmoother() {
-  return ScrollSmoother.create({
-    wrapper: '.page-wrapper',
-    content: '.page-main',
-    smooth: 0.75
-  });
-}
-
 function getDeviceType() {
   const screenWidth = window.innerWidth;
 
@@ -40,6 +32,14 @@ function getDeviceType() {
     isMobileLandscape: breakpoints.mobileLandscape,
     isMobilePortrait: breakpoints.mobilePortrait
   };
+}
+
+function initScrollSmoother() {
+  return ScrollSmoother.create({
+    wrapper: '.page-wrapper',
+    content: '.page-main',
+    smooth: 0.75
+  });
 }
 
 function initSideImageAlignment() {
@@ -459,14 +459,21 @@ window.Webflow.push(() => {
 
   const device = getDeviceType();
 
-  console.log(`Current device: ${device.type} (${device.width}px)`);
+  // console.log(`Current device: ${device.type} (${device.width}px)`);
 
   if (device.isDesktop) {
     initFeaturedCoreItemHoverVideo();
-    console.log('FIRE');
-  }
 
-  const smoother = initScrollSmoother();
+    const smoother = initScrollSmoother();
+    window.addEventListener('load', () => {
+    imagesLoaded(document.body, () => {
+      smoother?.refresh?.();
+      ScrollTrigger.refresh();
+    });
+  
+  });
+  }
+  
   initMasonry();
   initSideImageAlignment();
   lazyInitNoodleAnimation();
@@ -479,12 +486,6 @@ window.Webflow.push(() => {
   initCustomCursor();
   initTeamCardHoverVideo();
 
-  window.addEventListener('load', () => {
-    imagesLoaded(document.body, () => {
-      smoother?.refresh?.();
-      ScrollTrigger.refresh();
-    });
-  });
 });
 
 window.FinsweetAttributes ||= [];
