@@ -11,26 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
         loop: true,
         direction: 'horizontal',
         speed: 500,
-        slidesPerView: 1.5, // Mobile Portrait
-        spaceBetween: 16,
-
-        breakpoints: {
-            // Mobile Landscape: when window width is >= 479px
-            479: {
-                slidesPerView: 'auto',
-                spaceBetween: 16
-              },
-            // Tablet: when window width is >= 768px
-            768: {
-              slidesPerView: 'auto',
-              spaceBetween: 32
-            },
-            // Desktop: when window width is >= 992px
-            992: {
-              slidesPerView: 'auto',
-              spaceBetween: 64
-            }
-        },
+        slidesPerView: 'auto',
       
         // Navigation arrows
         navigation: {
@@ -39,53 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
     }
-
-    // ===================================
-    // Swiper – Featured Services
-    // ===================================
-    
-    // const featuredServices = document.querySelector(".featured-services");
-
-    // if (featuredServices){
-    //   const featuredServicesSwiper = new Swiper('.swiper.cc-featured-services', {
-    //     slidesPerView: 'auto',    
-    //     direction: 'horizontal',
-    //     speed: 5000,
-    //     loop: true,
-    //     autoplay: {
-    //       delay: 0,
-    //       disableOnInteraction: false,
-    //     },
-    //     touchStartPreventDefault: false,
-    //     allowTouchMove: true,
-    //   });
-    // }
-
-    // ===================================
-    // Swiper – Overflow Images
-    // ===================================
-    
-    // const overflowImages = document.querySelector(".overflow-images");
-
-    // if (overflowImages) {
-    //   const overflowImagesSwiper = new Swiper('.swiper.cc-overflow-images', {
-    //     slidesPerView: 'auto',    
-    //     direction: 'horizontal',
-    //     speed: 500,
-    //     loop: true,
-    //     autoplay: {
-    //       delay: 0,
-    //       disableOnInteraction: false,
-    //     },
-    //     // touchStartPreventDefault: false,
-    //     allowTouchMove: true,
-        
-    //       navigation: {
-    //         nextEl: overflowImages.querySelector("[data-swiper='next-btn']"),
-    //         prevEl: overflowImages.querySelector("[data-swiper='prev-btn']"),
-    //       }
-    //   });
-    // }
 
     // ===================================
     // Swiper – Subscribe Academies
@@ -98,26 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
         loop: true,
         direction: 'horizontal',
         speed: 500,
-        slidesPerView: 1.5,
-        spaceBetween: 24,
-
-        breakpoints: {
-            // Mobile Landscape: when window width is >= 479px
-            479: {
-                slidesPerView: 1.5,
-                spaceBetween: 24,
-              },
-            // Tablet: when window width is >= 768px
-            768: {
-              slidesPerView: 2.5,
-              spaceBetween: 32,
-            },
-            // Desktop: when window width is >= 992px
-            992: {
-              slidesPerView: 3.5,
-              spaceBetween: 32,
-            }
-        },
+        slidesPerView: 'auto',
 
         navigation: {
           nextEl: subscribeAcademies.querySelector("[data-swiper='next-btn']"),

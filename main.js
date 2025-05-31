@@ -42,6 +42,88 @@ function initScrollSmoother() {
   });
 }
 
+function initVideoPlayer() {
+  document.querySelectorAll('[data-video="wrapper"]').forEach(wrapper => {
+    const video = wrapper.querySelector('[data-video="player"]');
+    const placeholder = wrapper.querySelector('[data-video="placeholder"]');
+    const playBtn = wrapper.querySelector('[data-video="play-btn"]');
+    const controls = wrapper.querySelector('[data-video="controls"]');
+    const pauseBtn = wrapper.querySelector('[data-video="pause-btn"]');
+    const restartBtn = wrapper.querySelector('[data-video="restart-btn"]');
+    const muteAudioBtn = wrapper.querySelector('[data-video="mute-audio-btn"]');
+    const playAudioBtn = wrapper.querySelector('[data-video="play-audio-btn"]');
+    const fullscreenBtn = wrapper.querySelector('[data-video="fullscreen-btn"]');
+    
+    playAudioBtn.style.display = 'none';
+    
+    // Play Fullscreen
+    fullscreenBtn.addEventListener('click', () => {
+      if (video.requestFullscreen) {
+        video.requestFullscreen();
+      } else if (video.webkitEnterFullscreen) { // iOS Safari
+        video.webkitEnterFullscreen();
+      } else if (video.webkitRequestFullscreen) { // Safari desktop
+        video.webkitRequestFullscreen();
+      } else if (video.msRequestFullscreen) {
+        video.msRequestFullscreen();
+      } else {
+        console.warn('Fullscreen API is not supported in this browser.');
+      }
+    });
+
+    // Play video
+    playBtn.addEventListener('click', () => {
+      video.play();
+      playBtn.style.display = 'none';
+      controls.style.display = 'flex';
+    });
+
+    // Pause video
+    pauseBtn.addEventListener('click', () => {
+      video.pause();
+    });
+
+    // Restart video
+    restartBtn.addEventListener('click', () => {
+      video.currentTime = 0;
+      video.play();
+    });
+    
+    // Mute audio
+     muteAudioBtn.addEventListener('click', () => {
+      video.muted = true;
+      muteAudioBtn.style.display = 'none';
+      playAudioBtn.style.display = 'flex';
+    });
+    
+    // Play audio
+     playAudioBtn.addEventListener('click', () => {
+      video.muted = false;
+      playAudioBtn.style.display = 'none';
+      muteAudioBtn.style.display = 'flex';
+    });
+
+    // Show play button & hide controls when paused
+    video.addEventListener('pause', () => {
+      playBtn.style.display = 'flex';
+      controls.style.display = 'none';
+    });
+
+    // Optional: make sure controls stay visible during playback
+    video.addEventListener('play', () => {
+      controls.style.display = 'flex';
+      playBtn.style.display = 'none';
+      placeholder.style.display = 'none';
+    });
+
+    // Optional: also hide controls when video ends
+    video.addEventListener('ended', () => {
+      playBtn.style.display = 'flex';
+      controls.style.display = 'none';
+    });
+  });
+}
+
 function initSideImageAlignment() {
   const sideImages = document.querySelectorAll('.image-edge.left, .image-edge.right');
   if (!sideImages.length) return; // ⛔ skip entire init if not needed
@@ -90,7 +172,7 @@ function initMarquee() {
 
       gsap.to(content, {
         x: `-${totalWidth}px`,
-        duration: parseInt(content.getAttribute('data-marquee-duration'), 10) || 15,
+        duration: parseInt(content.getAttribute('data-marquee-duration'), 10) || 20,
         ease: "linear",
         repeat: -1
       });
@@ -373,13 +455,8 @@ function initFeaturedCoreItemHoverVideo() {
         opacity: 0,
         x: 0,
         rotate: 0,
-        duration: 0.3,
+        duration: 0.175,
         ease: 'power2.inOut',
-        onComplete: () => {
-          // Failsafe cleanup
-          video.pause();
-          video.currentTime = 0;
-        }
       });
     }
 
@@ -452,7 +529,7 @@ function initCustomCursor() {
 }
 
 // =========================
-// Webflow Hook
+// Webflow & Finsweet Hook
 // =========================
 window.Webflow ||= [];
 window.Webflow.push(() => {
@@ -474,6 +551,7 @@ window.Webflow.push(() => {
   });
   }
   
+  initVideoPlayer();
   initMasonry();
   initSideImageAlignment();
   lazyInitNoodleAnimation();
