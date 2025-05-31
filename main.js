@@ -109,10 +109,13 @@ function initVideoPlayer() {
       controls.style.display = 'none';
     });
 
-    // Optional: make sure controls stay visible during playback
     video.addEventListener('play', () => {
       controls.style.display = 'flex';
       playBtn.style.display = 'none';
+      // placeholder stays visible for now
+    });
+
+    video.addEventListener('playing', () => {
       placeholder.style.display = 'none';
     });
 
