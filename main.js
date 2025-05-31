@@ -531,6 +531,23 @@ function initCustomCursor() {
   });
 }
 
+function initAnimations() {
+  (function animateSections() {
+    document.querySelectorAll("section:not(:first-of-type)").forEach((el) => {
+      gsap.from(el, {
+        scrollTrigger: {
+          trigger: el,         // 👈 this targets the element itself
+          start: "top 68%",    // adjust as needed
+        },
+        opacity: 0,
+        y: 32,
+        duration: .8,
+        ease: 'power2.out'
+      }); // ← this closing parenthesis was missing
+    });
+  })();
+}
+
 // =========================
 // Webflow & Finsweet Hook
 // =========================
@@ -554,6 +571,7 @@ window.Webflow.push(() => {
   });
   }
   
+  initAnimations();
   initVideoPlayer();
   initMasonry();
   initSideImageAlignment();
