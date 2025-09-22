@@ -154,14 +154,17 @@ function initSideImageAlignment() {
 
 function initMarquee() {
   const wrappers = document.querySelectorAll('[data-marquee="wrapper"]');
+
   if (!wrappers.length) return; // ⛔ skip entire init if not needed
 
   wrappers.forEach(wrapper => {
     const content = wrapper.querySelector('[data-marquee="content"]');
-    const inner = content?.firstElementChild;
+    const inner = content.querySelector('[data-marquee="inner"]');
+
     if (!content || !inner) return;
 
-    const count = parseInt(content.getAttribute('data-marquee-count'), 10) || 2;
+    const count = parseInt(content.getAttribute('data-marquee-count'), 10) || 1;
+    const duration = parseInt(content.getAttribute('data-marquee-duration'), 10) || 20;
 
     // Clone the inner content 'count' times
     for (let i = 0; i < count; i++) {
@@ -171,11 +174,11 @@ function initMarquee() {
     // Use requestAnimationFrame to wait until clones are rendered
     requestAnimationFrame(() => {
       const totalWidth = inner.offsetWidth;
-      // console.log(totalWidth);
+      console.log(totalWidth);
 
       gsap.to(content, {
         x: `-${totalWidth}px`,
-        duration: parseInt(content.getAttribute('data-marquee-duration'), 10) || 20,
+        duration: duration,
         ease: "linear",
         repeat: -1
       });
