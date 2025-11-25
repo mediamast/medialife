@@ -53,6 +53,7 @@ function initVideoPlayer() {
     const muteAudioBtn = wrapper.querySelector('[data-video="mute-audio-btn"]');
     const playAudioBtn = wrapper.querySelector('[data-video="play-audio-btn"]');
     const fullscreenBtn = wrapper.querySelector('[data-video="fullscreen-btn"]');
+    const loadingIcon = wrapper.querySelector('[data-video="loading-icon"]');
     
     playAudioBtn.style.display = 'none';
     
@@ -76,6 +77,11 @@ function initVideoPlayer() {
       video.play();
       playBtn.style.display = 'none';
       controls.style.display = 'flex';
+    });
+
+    // Show loading icon on play click
+    playBtn.addEventListener('click', () => {
+      loadingIcon.style.display = 'block';
     });
 
     // Pause video
@@ -117,6 +123,7 @@ function initVideoPlayer() {
 
     video.addEventListener('playing', () => {
       placeholder.style.display = 'none';
+      loadingIcon.style.display = 'none';
     });
 
     // Optional: also hide controls when video ends
