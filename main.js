@@ -569,6 +569,7 @@ window.Webflow.push(() => {
   // console.log(`Current device: ${device.type} (${device.width}px)`);
 
   if (device.isDesktop) {
+    initParallax();
     initFeaturedCoreItemHoverVideo();
 
     const smoother = initScrollSmoother();
@@ -586,7 +587,6 @@ window.Webflow.push(() => {
   initMasonry();
   initSideImageAlignment();
   lazyInitNoodleAnimation();
-  initParallax();
   initThemeSwitch();
   initAcademySubscribeForm();
   initMarquee();
